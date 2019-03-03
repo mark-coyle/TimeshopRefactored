@@ -1,3 +1,5 @@
 .env
 my_env/
-__pycache__git 
+__pycache__git
+*.pyc
+.vscode/

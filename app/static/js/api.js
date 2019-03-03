@@ -14,15 +14,14 @@ function getData(){
             "content-type": "application/json",
             "cache-control": "no-cache",
           },
-        url: base_url, 
+        url: base_url,
         method:"POST",
         type:"application/json",
         data: { queryString: "John" },
         success: function(result){
             alert(result)
         },
-        error: function(){
-            alert('failed');
+
         }
     });
 }
@@ -31,7 +30,7 @@ function getData(){
 // function getData(){
 //     var url = "https://newsapi.org/v1/articles?source=financial-times&sortBy=top&apiKey=6ee64fd295a44f738df66cc1838a73b3";
 //     $.ajax({
-//         url: url, 
+//         url: url,
 //         method:"GET",
 //         type:"application/json",
 //         success: function(result){
@@ -46,11 +45,6 @@ function getData(){
 //     });
 // }
 
-
-$(document).ready(function(){
-    getData();
-
-
+$(document).ready(function() {
+  getData();
 });
-
-
