@@ -1,0 +1,106 @@
+{% extends 'main_layout.html' %} {% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Checkout
+            <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Confirm Order Items</h3>
+                        <div class="panel body">
+                            <table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for p in products %}
+                                    <tr>
+                                        <td>{{p.name}}</td>
+                                        <td>{{p.description}}</td>
+                                        <td>€{{p.price}}</td>
+                                        <td>{{p.quantity}} </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Total: €{{total}}</td>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Div For Shipping Address -->
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Confirm Shipping Details</h3>
+                        <div class="panel body">
+                            <table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>Account Name</th>
+                                        <th>Shipping Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>First Name : </td>
+                                        <td>{{user.first_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Name :</td>
+                                        <td>{{user.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Address :</td>
+                                        <td>{{account.shipping_address}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+
+                            </div>
+                            <div class="panel-body">
+                                <a href="/Account"><button class="btn btn-warning btn-block">Cancel Order</button></a>
+                                <a href="/ConfirmOrder"><button class="btn btn-primary btn-block">Confirm Order</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+    </div>
+
+    {% endblock %}

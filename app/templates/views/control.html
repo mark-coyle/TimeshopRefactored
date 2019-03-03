@@ -1,0 +1,136 @@
+{% extends 'main_layout.html' %} {% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Dashboard
+            <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Users Overview</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <td>Total Users</td>
+                                    <td>{{ total_users.count }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Currently Logged In</td>
+                                    <td>{{ current_users.user_count }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Order Overview</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <td>Total Orders</td>
+                                    <td>{{ order_total.total_orders }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Orders Today</td>
+                                    <td>{{ todays_orders.orders }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>Quick Actions</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <td><a href="/Product/add" class="btn btn-default">Add A Product</a></td>
+                                    <td><a href="/StockList" class="btn btn-default">View Current stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Product Overview</h3>
+                        </div>
+                        <div class="panel body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <td>Product Count</td>
+                                    <td>{{ count.count }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Alerts</h3>
+                        </div>
+                        <div class="panel-body">
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div id="container" style="width:100%; height:100%"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <div id="orderdata" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+</div>
+
+{% endblock %}

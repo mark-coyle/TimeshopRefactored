@@ -1,0 +1,13 @@
+
+
+/* Product Containers */
+.product-container{
+    background-color:#c2c2c2;
+}
+.product-name, .product-description , .product-price{
+    font-family: 'Gill Sans';
+}
+
+.product-name{
+    font-size: 62px;
+}

@@ -1,0 +1,41 @@
+<div class="main-header">
+    <!-- Logo -->
+    <a href="" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>TTS</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>The Time Shop</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{ session['username'] }}
+                </a>
+                    <ul class="dropdown-menu">
+                        <ul class="menu">
+                            <li>
+                                <i class="fa fa-sign-out"></i><a href="/login">Logout</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-user"></i><a href="/account">Account</a>
+                            </li>
+                            {% if session['user_type'] == "Admin" %}
+                            <li>
+                                <i class="fa fa-key"></i><a href="/user/manager">User Manager</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,202 @@
+{% extends 'main_layout.html' %} 
+
+{% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+        <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- Image Div -->
+                <div class="col-md-6">
+                    {% if product.image != "" and product.image != "test.png" and product.image != "Capture.PNG" %}
+                        <img src="{{ url_for('static', filename='images/products/'+product.image) }}" alt="{{product.image}}" class="img-responsive">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/modern-watch.jpg') }}" alt="test" class="img-responsive">
+                    {% endif %}
+                </div>
+
+                <!-- Div for Prouct Info -->
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Product Information
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>{{product.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>A Brief Description</td>
+                                    <td>{{product.description}}</td>
+                                </tr>
+                                <tr>
+                                    <td>RRP </td>
+                                    <td>€ {{product.price}}</td>
+                                </tr>
+                            </table>
+        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                {% if session['user_type'] == 'User' %}
+                                    {% if stock.amount > 0 %}
+                                        {% if item_in_cart == True%}
+                                            <div class="col-md-6">
+                                                <a href="/RemoveFromCart/{{user.user_id}}/{{product.product_id}}"><button class="btn btn-success btn-block"><i class="fa fa-shopping-cart" style="color:grey;"></i> Remove From Cart</button></a>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-md-6">
+                                                <a href="/AddToCart/{{user.user_id}}/{{product.product_id}}"><button class="btn btn-success btn-block"><i class="fa fa-shopping-cart"></i> Add to Cart</button></a>
+                                            </div>
+                                        {% endif %}
+                                        {% if user_liked == True %}
+                                            <div class="col-md-6">
+                                                <a href="/UnlikeProduct/{{user.user_id}}/{{product.product_id}}"><button class="btn btn-success btn-block"><i class="fa fa-heart" style="color:red;"></i> Unlike This Product</button></a>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-md-6">
+                                                <a href="/LikeProduct/{{user.user_id}}/{{product.product_id}}"><button class="btn btn-success btn-block"><i class="fa fa-heart"></i> Like This Product</button></a>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                            <p>This Product is currently out of stock</p>
+                                    {% endif %}
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Space -->
+        <div class="row">
+            &nbsp;
+        </div>
+
+        <!-- Section For Product Statistics
+             How Many Other Customers Like It
+             How Often Its Ordered Etc.
+        -->
+        {% if session['user_type'] == "Admin" %}
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Product Review Information
+                        </div>
+                        <div class="panel-body">
+                            This Product is currently Liked By {{ like_count.product_like_count }} {% if like_count.product_like_count > 1 %} Customers {% else %} Customer {% endif %}
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Sales Information
+                            </div>
+                            <div class="panel-body">
+                                    {% if order_count.order_count == 0 %} This item has not yet been ordered. {% elif order_count.order_count > 1 %} This Product Has been Ordered By {{ order_count.order_count }}  Customers {% else %} This Product Has been Ordered By {{ order_count.order_count }}  Customer {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Only show if user -->
+        {% if session['user_type'] == 'User' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Review Information</div>
+                        <div class="panel-body">
+                                <!-- Display Review Information -->
+                            {% if reviews %}
+                                <!-- Display review info -->
+                                {% for r in reviews %}
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h4>{{ r.title }}</h4>
+                                            <p><small>{{ r.datetime }}</small> &nbsp;&nbsp;{{ r.username }}</p>
+
+                                            <p> {{ r.description }} </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>This Product currently has no Reviews</p>
+                            {% endif %}
+                        </div>
+                        {% if session['user_type'] == 'User' %}
+                        <div class="panel-footer">
+                            <a href="/Product/review/{{product.product_id}}/{{user.user_id}}"><button class="btn btn-success btn-xs">Review This Product</button></a>                            
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+       
+
+        <!-- Similar Products Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h3>Similar Products</h3>
+                </div>
+                
+
+                <!-- Output Similar Products -->
+                {% for watch in similar_products %}
+                    <div class="col-md-4">
+                        <div class="product-container">
+                            <img src="{{ url_for('static', filename='images/modern-watch.jpg') }}" alt="{{watch.image}}" class="img-responsive">
+
+                            <div class=" product-info">
+                                <div class=" product-name">
+                                    <h4 class="text-center"><a href="/Product/view/{{watch.product_id}}">{{watch.name}}</a></h4>
+                                </div>
+                                <div class=" product-description ">
+                                    <p class="text-center">{{watch.description}}</p>
+                                </div>
+                                <div class=" product-price ">
+                                   <p class="text-center">€{{watch.price}}</p> 
+                                </div>
+                                <div class="">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    
+</div>
+
+{% endblock %}

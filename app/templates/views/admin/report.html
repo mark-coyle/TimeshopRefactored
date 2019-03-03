@@ -1,0 +1,75 @@
+{% extends 'main_layout.html' %} {% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+
+        <h1>
+            Report
+            <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2">
+                    <label for="form">
+                        Select Order Data by Month
+                    </label>
+                    <form action="/OrderReport" method="POST" id="form">
+                        <select name="month" id="month">
+                            {% if data %}
+                                {% for month in data %}
+                                    <option value="{{month.month_value}}">{{ month.months }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">
+                            Get Data
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+
+            {% if orders %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-stripped">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Order Date</th>
+                                <th>Order Amount</th>
+                                <th>Customer</th>
+                                <th>Shipped To</th>
+                            </tr>
+                            {% for i in orders %}
+                            <tr>
+                                <td>{{i.order_id}}</td>
+                                <td>{{i.order_date}}</td>
+                                <td>€{{i.order_total}}</td>
+                                <td>{{i.fname}} {{i.lname}}</td>
+                                <td>{{i.shipped_to}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+
+
+    </section>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'main_layout.html' %} 
+
+{% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+        <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                {% if watches %}
+                    {% for watch in watches %}
+
+                        <div class="col-md-4">
+                            <div class="product-container">
+                                {% if watch.image != "" and watch.image != "test.png" and watch.image != "Capture.PNG" %}
+                                <img src="{{ url_for('static', filename='images/products/'+watch.image) }}" alt="{{watch.image}}" class="img-responsive">
+                                {% else %}
+                                <img src="{{ url_for('static', filename='images/modern-watch.jpg') }}" alt="{{watch.image}}" class="img-responsive">
+                                {%endif%}
+                                <div class=" product-info">
+                                    <div class=" product-name">
+                                        <h4><a href="/Product/view/{{watch.product_id}}">{{watch.name}}</a></h4>
+                                    </div>
+                                    <div class=" product-description ">
+                                        <p>{{watch.description}}</p>
+                                    </div>
+                                    <div class=" product-price ">
+                                        €{{watch.price}}
+                                    </div>
+                                    <div class="">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <p>Not Watches Found! </p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    
+</div>
+
+{% endblock %}

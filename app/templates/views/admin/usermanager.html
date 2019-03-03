@@ -1,0 +1,60 @@
+{% extends 'main_layout.html' %} 
+
+{% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+        Account
+        <small>Control panel</small>
+        </h1>
+        {% include 'includes/_messages.html' %}
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>User List</h3>
+                        <div class="panel body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>User Name</th>
+                                    <th>Account Status</th>                                  
+                                </tr>
+                                {% for user in users %}
+                                    <tr>
+                                        <td><a href="">{{user.user_id}}</a></td>
+                                        <td>{{user.username}}</td>
+                                        {% if user.account_status != 1 %}
+                                        <td>Normal</td>
+                                            <td><a href="/BlockAccount/{{user.user_id}}"><button class="btn btn-primary"><i class="fa fa-lock"></i></button></a></td>
+                                            <td><a href="/UnblockAccount/{{user.user_id}}"><button class="btn btn-danger" disabled><i class="fa fa-unlock-alt"></i></button></a></td>
+                                        {% else %}
+                                        <td>Account Blocked</td>
+                                            <td><a href="/BlockAccount/{{user.user_id}}"><button class="btn btn-primary" disabled><i class="fa fa-lock"></i></button></a></td>
+                                            <td><a href="/UnblockAccount/{{user.user_id}}"><button class="btn btn-danger"><i class="fa fa-unlock-alt"></i></button></a></td>
+                                        {% endif %}
+                                        <td><a href="/ResetPassword/{{user.user_id}}"><button class="btn btn-success"><i class="fa fa-key"></i></button></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    
+</div>
+
+{% endblock %}

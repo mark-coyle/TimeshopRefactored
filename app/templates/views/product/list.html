@@ -1,0 +1,59 @@
+{% extends 'main_layout.html' %} 
+
+{% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+        StockList 
+        <small>Control panel</small>
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>StockList</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-stripped">
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Product Quantity</th>
+                                    <th>Stock Tolerance</th>                                    
+                                </tr>
+                                {% for product in product_list %}
+                                        <tr>
+                                            <td><a href="/Product/edit/{{product.product_id}}">{{product.product_id}}</a></td>
+                                            <td>{{product.name}}</td>
+                                            <td>{{product.quantity}}</td>  
+                                            {% if product.stock_status == 'Under Tolerance' %}
+                                                <td><i class="fa fa-exclamation-triangle" aria-hidden="true" style="background-color:red; color:white;"></i>
+                                                </td>
+                                            {% else %}
+                                                <td><i class="fa fa-check" aria-hidden="true"
+                                                    style="background-color:green; color:white;"></i>
+                                                </td>
+                                            {% endif %}                                                                    
+                                        </tr>
+                                    {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</div>
+
+{% endblock %}

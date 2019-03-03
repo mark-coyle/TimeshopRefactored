@@ -1,0 +1,48 @@
+{% extends 'main_layout.html' %} 
+
+{% block body %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+        Product Review
+        <small>Control panel</small>
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Recent Updates  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-9 col-md-offset-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Reviewing</h3>
+                            <div class="panel body">
+                            {% from 'includes/_formhelpers.html' import render_field %}
+                                <form method="post" action="">
+                                    <table class="table table-stripped">
+                                        <div class="form-group">
+                                            {{render_field(form.title, class="form-control")}}
+                                        </div>
+                                        <div class="form-group">
+                                            {{render_field(form.description, class="form-control")}}
+                                        </div>
+                                    <input type="submit" value="Add" class="btn btn-success btn-block">
+                                </form>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</div>
+
+{% endblock %}
